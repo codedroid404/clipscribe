@@ -237,7 +237,7 @@ def _settings() -> tuple[str, str | None, bool]:
                 "by an LLM.\n"
                 "- Uncertain / no-speech / repeated segments are **flagged**, not guessed.\n"
                 "- Uploaded media is processed in a temporary folder and **deleted** after.\n"
-                "- Built by **Sita Sanon** — [GitHub](https://github.com/sitasanon)"
+                "- Built by **Sita Sanon** — [GitHub](https://github.com/codedroid404)"
             )
     return model, language, use_vad
 
@@ -702,7 +702,7 @@ def main() -> None:
 
     st.divider()
     st.caption(
-        "Built by **Sita Sanon** · [GitHub](https://github.com/sitasanon) · "
+        "Built by **Sita Sanon** · [GitHub](https://github.com/codedroid404) · "
         "ClipScribe — privacy-first local ASR"
     )
 

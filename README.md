@@ -38,7 +38,7 @@ short video/audio clips (especially iPhone `.MOV`/`.MP4` screen recordings), bui
 | Tab / view | Description |
 |---|---|
 | 🎙️ Transcribe | Upload, settings, progress, transcript review, downloads, and the saved library |
-| ✨ AI analysis | Placeholder for the planned local-first AI layer (see [Roadmap](#-roadmap)) |
+| ✨ AI analysis | Placeholder for the planned local-first AI layer (see [Roadmap](#roadmap)) |
 | 📖 Readable | Clean flowing prose — shown first (same words, timestamps removed; not an LLM rewrite) |
 | 🧩 Segments | Sortable table with per-segment quality flags (collapsible) |
 | ⏱️ Timestamped | The raw timestamped source transcript (collapsible) |
@@ -166,13 +166,16 @@ clipScribe/
   model-certainty signal (closer to zero = more certain), not an accuracy percentage.
 - Formal WER is deferred until a human-validated reference transcript exists.
 
+<a id="roadmap"></a>
+
 ## 🗺️ Roadmap
 
 The MVP is the local ASR tool above. The planned next milestone is a **local-first
 AI-analysis layer** — ask grounded, cited questions about your *own* saved transcripts, with
 retrieval on-device and only the assembled prompt (never your media) sent to an optional,
 consent-gated provider. The in-app **AI analysis** tab is a placeholder today, and the ✨
-AI-title is a first taste. See `docs/ClipScribe_Project_Plan_v2.pdf` §14 for the full roadmap.
+AI-title is a first taste. See the [project plan](docs/ClipScribe_Project_Plan_v2.pdf) (§14)
+for the full roadmap.
 
 ## 👤 Author
 
