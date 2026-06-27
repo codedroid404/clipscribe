@@ -28,8 +28,11 @@ short video/audio clips (especially iPhone `.MOV`/`.MP4` screen recordings), bui
 
 ![ClipScribe demo](docs/assets/demo.gif)
 
-### Home (after a transcription)
-![ClipScribe home](docs/assets/screenshot-home.png)
+### Home
+![ClipScribe — empty home](docs/assets/screenshot-home-empty.png)
+
+### After a transcription
+![ClipScribe — after a transcription](docs/assets/screenshot-home.png)
 
 > **Why it exists:** useful advice is often trapped in short-form video audio. The old
 > workaround — playing a clip on one phone while Apple Notes transcribed it on another — was
