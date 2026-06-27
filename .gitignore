@@ -45,6 +45,10 @@ docs/UI_IMPROVEMENT.md
 docs/plans/
 docs/reviews/
 
+# --- Raw demo source (keep the exported demo.gif + screenshot, not the originals) ---
+docs/assets/*.mov
+docs/assets/*.pdf
+
 # --- Secrets (keep .env.example tracked) ---
 .env.*
 !.env.example

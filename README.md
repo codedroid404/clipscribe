@@ -26,7 +26,9 @@ short video/audio clips (especially iPhone `.MOV`/`.MP4` screen recordings), bui
 
 ## 📸 Demo
 
-### Home
+![ClipScribe demo](docs/assets/demo.gif)
+
+### Home (after a transcription)
 ![ClipScribe home](docs/assets/screenshot-home.png)
 
 > **Why it exists:** useful advice is often trapped in short-form video audio. The old
