@@ -1,0 +1,66 @@
+# --- ClipScribe privacy rules: never commit media or transcripts ---
+media/
+samples/
+transcripts/
+artifacts/
+references/
+
+# Local saved-transcript library (SQLite) — contains transcript content
+data/
+
+# Secrets / hosted-chat config (keep .env.example, ignore the real .env)
+.env
+
+# --- Python environments ---
+.venv/
+venv/
+env/
+
+# --- Python caches / build ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.eggs/
+
+# --- Tooling caches ---
+.ruff_cache/
+.pytest_cache/
+.mypy_cache/
+
+# --- Model weight caches (kept local, never committed) ---
+.cache/
+
+# --- OS / editor noise ---
+.DS_Store
+.vscode/
+.idea/
+
+# --- Claude Code local settings (keep CLAUDE.md tracked; ignore local config) ---
+.claude/
+
+# --- Internal working docs — kept local, not part of the published repo ---
+docs/UI_IMPROVEMENT.md
+docs/plans/
+docs/reviews/
+
+# --- Secrets (keep .env.example tracked) ---
+.env.*
+!.env.example
+.streamlit/secrets.toml
+
+# --- Databases (may hold transcript content) ---
+*.db
+*.sqlite
+*.sqlite3
+
+# --- Coverage ---
+.coverage
+htmlcov/
+coverage.xml
+
+# --- More OS / editor noise ---
+Thumbs.db
+*.swp
+*~

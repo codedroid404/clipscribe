@@ -1,0 +1,26 @@
+========================================================================
+ClipScribe — M0/M1 Automated Validation Log
+Generated (UTC): 2026-06-24T04:03:00Z
+Model: base | Device: cpu/int8
+========================================================================
+
+[1/5] Lint (ruff)             : PASS
+[2/5] Unit tests (pytest)     : PASS
+[3/5] Transcription (faster-whisper)
+        decode + ASR          : SUCCESS
+        detected language     : en (p=1.00)
+        media duration        : 49.202s
+        processing time       : 3.793s
+        real-time factor      : 0.08
+        segment count         : 16
+        outputs txt/json/srt/vtt : yes
+        transcript            : [TRANSCRIPT CONTENT REDACTED]
+[4/5] App boot (streamlit)    : PASS
+[5/5] Privacy check           : PASS
+
+Manual faithfulness review    : NOT RECORDED  (human attestation, not an automated check)
+Source media filename         : [MEDIA FILENAME REDACTED]
+Source / cache paths          : [LOCAL PATH REDACTED]
+
+Result: ALL CHECKS PASSED
+========================================================================

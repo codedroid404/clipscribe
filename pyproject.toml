@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "clipscribe"
+version = "0.1.0"
+description = "Privacy-first local ASR application: faithful, timestamped transcripts of short screen recordings using faster-whisper."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = [
+    # Local ASR engine. Pulls in ctranslate2 (inference), av/PyAV (in-memory
+    # MP4/MOV demux + audio decode, so no system ffmpeg is required),
+    # huggingface-hub (one-time model-weight download), onnxruntime (Silero VAD).
+    "faster-whisper>=1.1.0,<2.0",
+    # Word-error-rate metrics for the (currently pending) reference comparison.
+    "jiwer>=3.0.0,<4.0",
+    # Browser UI for the M3 MVP (upload, settings, transcript review, downloads).
+    "streamlit>=1.40,<2.0",
+    # Optional hosted-LLM call powering the ✨ AI-title button only. Used solely when
+    # the user opts in and provides an API key; transcription stays fully local.
+    "anthropic>=0.40,<1.0",
+    "python-dotenv>=1.0,<2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.8.0,<1.0",
+    "pytest>=8.0.0,<9.0",
+]
+
+[project.scripts]
+clipscribe = "clipscribe.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src", "scripts", "."]

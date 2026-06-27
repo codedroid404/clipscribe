@@ -1,0 +1,15 @@
+ClipScribe — M6 review evidence (persistence / saved transcript library)
+
+Checks run:
+  $ ruff check .
+  All checks passed!
+
+  $ pytest -q
+  full suite green (storage round-trip, blank-title fallback, delete/missing,
+  empty-library, text-import, delete-all all covered in tests/unit/test_storage.py)
+
+Notes:
+  - SQLite store at gitignored data/clipscribe.db (stdlib sqlite3; no new dependency).
+  - Segment-level timestamps preserved in stored JSON.
+  - Logs record ids/counts only — no transcript content or filenames.
+  - Headless app-boot check is regenerable via ./review.sh (CLIP=<clip> ./review.sh).

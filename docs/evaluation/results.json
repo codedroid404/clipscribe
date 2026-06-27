@@ -1,0 +1,42 @@
+[
+  {
+    "clip": "Clip A (~49s, spoken English)",
+    "model": "base",
+    "duration_s": 49.2,
+    "processing_s": 3.8,
+    "rtf": 0.078,
+    "segments": 16,
+    "flagged": 0,
+    "warnings": "\u2014"
+  },
+  {
+    "clip": "Clip A (~49s, spoken English)",
+    "model": "small",
+    "duration_s": 49.2,
+    "processing_s": 8.8,
+    "rtf": 0.179,
+    "segments": 18,
+    "flagged": 0,
+    "warnings": "\u2014"
+  },
+  {
+    "clip": "Clip B (~212s, spoken English)",
+    "model": "base",
+    "duration_s": 212.0,
+    "processing_s": 18.2,
+    "rtf": 0.086,
+    "segments": 56,
+    "flagged": 0,
+    "warnings": "\u2014"
+  },
+  {
+    "clip": "Clip B (~212s, spoken English)",
+    "model": "small",
+    "duration_s": 212.0,
+    "processing_s": 41.3,
+    "rtf": 0.195,
+    "segments": 56,
+    "flagged": 0,
+    "warnings": "\u2014"
+  }
+]

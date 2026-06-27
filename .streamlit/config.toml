@@ -1,0 +1,41 @@
+# ClipScribe Streamlit configuration.
+
+[server]
+# Upload cap for short-form recordings. 512 MB covers a few-minute screen
+# recording while rejecting oversized files before processing. media.py enforces
+# the same limit and validates the audio stream after upload.
+maxUploadSize = 512
+# Serve the bundled Inter font from static/ (referenced by [[theme.fontFaces]]).
+enableStaticServing = true
+
+[browser]
+# Privacy: never send usage statistics to Streamlit's servers.
+gatherUsageStats = false
+
+[[theme.fontFaces]]
+family = "Inter"
+url = "app/static/InterVariable.woff2"
+weight = "100 900"
+style = "normal"
+
+[theme]
+base = "light"
+primaryColor = "#0d9488"
+backgroundColor = "#e8f1ef"
+secondaryBackgroundColor = "#dceae7"
+textColor = "#0f172a"
+linkColor = "#0f766e"
+borderColor = "#c5dcd6"
+showWidgetBorder = true
+baseRadius = "large"
+buttonRadius = "full"
+dataframeHeaderBackgroundColor = "#d6e9e5"
+font = "Inter"
+headingFont = "Inter"
+codeFont = "monospace"
+baseFontSize = 15
+
+[theme.sidebar]
+backgroundColor = "#dfece9"
+secondaryBackgroundColor = "#eef5f3"
+borderColor = "#c5dcd6"
