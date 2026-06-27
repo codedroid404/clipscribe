@@ -75,7 +75,7 @@ st.set_page_config(page_title="ClipScribe", page_icon="🎙️", layout="wide")
 # below are version-sensitive (Streamlit internals) — keep this block small.
 _CSS = """
 <style>
-.block-container { padding-top: 1.5rem; padding-bottom: 4rem; max-width: 1100px; }
+.block-container { padding-top: 3rem; padding-bottom: 4rem; max-width: 1100px; }
 /* White cards float on the soft tinted canvas for depth */
 [data-testid="stVerticalBlockBorderWrapper"] {
   background: #ffffff;
