@@ -43,10 +43,29 @@ MARK = str(ASSETS / "clipscribe-mark.svg")
 
 # Selectable background tints — a small built-in theme switcher (sidebar).
 TINTS = {
+    # ── Original ──
     "Teal-gray": {"bg": "#e8f1ef", "sidebar": "#dfece9"},
     "Mint": {"bg": "#d4e9e4", "sidebar": "#c8e3dc"},
     "Sage": {"bg": "#e6f0e6", "sidebar": "#dce8da"},
     "Cool mist": {"bg": "#e1edf0", "sidebar": "#d9e8ec"},
+    # ── Soft (gentle color) ──
+    "Rose quartz": {"bg": "#f3e9ec", "sidebar": "#ecdfe3"},  # warm pink
+    "Butter": {"bg": "#f4efdf", "sidebar": "#ece6d2"},  # cream-yellow
+    "Lilac": {"bg": "#ece8f4", "sidebar": "#e2ddee"},  # cool lilac
+    "Sky": {"bg": "#e4eef7", "sidebar": "#d8e6f2"},  # airy blue
+    "Peach": {"bg": "#f6ebe3", "sidebar": "#efe0d4"},  # soft peach
+    "Spring sage": {"bg": "#e6efe0", "sidebar": "#dbe7d3"},  # fresh light green
+    # ── Mid (more presence) ──
+    "Dusty blue": {"bg": "#d8e3ee", "sidebar": "#cbd9e8"},  # muted denim
+    "Muted teal": {"bg": "#d3e6e2", "sidebar": "#c6ddd8"},  # cohesive w/ accent
+    "Clay": {"bg": "#ecdfd6", "sidebar": "#e2d2c6"},  # terracotta-beige
+    "Sage olive": {"bg": "#e1e6d4", "sidebar": "#d6dcc6"},  # gray-green
+    "Mauve": {"bg": "#e8dde4", "sidebar": "#ddccd6"},  # purple-gray
+    # ── Bold (white cards pop hardest) ──
+    "Deep sage": {"bg": "#cdddd3", "sidebar": "#bfd2c7"},  # rich green
+    "Slate blue": {"bg": "#cdd8e4", "sidebar": "#bfccdb"},  # blue-gray
+    "Warm taupe": {"bg": "#e0d4c6", "sidebar": "#d4c5b4"},  # warm greige
+    "Storm gray": {"bg": "#d6dadf", "sidebar": "#c8cdd4"},  # cool neutral
 }
 DEFAULT_TINT = "Teal-gray"
 
@@ -56,13 +75,12 @@ st.set_page_config(page_title="ClipScribe", page_icon="🎙️", layout="wide")
 # below are version-sensitive (Streamlit internals) — keep this block small.
 _CSS = """
 <style>
-.block-container { padding-top: 2.5rem; padding-bottom: 4rem; max-width: 1100px; }
+.block-container { padding-top: 1.5rem; padding-bottom: 4rem; max-width: 1100px; }
 /* White cards float on the soft tinted canvas for depth */
 [data-testid="stVerticalBlockBorderWrapper"] {
   background: #ffffff;
   box-shadow: 0 1px 3px rgba(15,23,42,0.07);
 }
-[data-testid="stFileUploaderDropzone"] { border: 1.5px dashed #5eead4; background: #f0fdfa; }
 [data-testid="stToolbar"], [data-testid="stDecoration"] { display: none; }
 /* The top header bar is empty now — make it transparent so the tint shows through */
 [data-testid="stHeader"] { background: transparent; }
@@ -507,12 +525,45 @@ def _record_ai_usage(provider) -> None:
     usage["cost"] += llm.call_cost(provider.model, in_tok, out_tok)
 
 
+def _mix(hex_a: str, hex_b: str, t: float) -> str:
+    """Linearly blend two #rrggbb colors (t=0 → hex_a, t=1 → hex_b)."""
+    a = [int(hex_a[i:i + 2], 16) for i in (1, 3, 5)]
+    b = [int(hex_b[i:i + 2], 16) for i in (1, 3, 5)]
+    r, g, bl = (round(a[i] + (b[i] - a[i]) * t) for i in range(3))
+    return f"#{r:02x}{g:02x}{bl:02x}"
+
+
+def _tint_tokens(bg: str) -> dict[str, str]:
+    """Neutral border + fill derived from the active tint so they always harmonize."""
+    return {
+        "border": _mix(bg, "#0f172a", 0.12),  # bg nudged toward the dark text color
+        "fill": _mix(bg, "#ffffff", 0.45),    # bg lightened toward white
+    }
+
+
 def _tint_css(name: str) -> str:
-    """Build the CSS that recolors the canvas + sidebar for the chosen tint."""
+    """Recolor the canvas + sidebar, deriving neutral border/fill from the tint.
+
+    Only the neutrals track the tint. The teal accent (#0d9488), white cards (#ffffff),
+    and dark text (#0f172a) stay fixed — so e.g. the upload drop-zone reads neutral on a
+    gray tint instead of looking green.
+    """
     t = TINTS.get(name, TINTS[DEFAULT_TINT])
+    bg, sidebar = t["bg"], t["sidebar"]
+    tok = _tint_tokens(bg)
+    border, fill = tok["border"], tok["fill"]
     return (
-        f"<style>.stApp{{background-color:{t['bg']} !important;}}"
-        f'[data-testid="stSidebar"]{{background-color:{t["sidebar"]} !important;}}</style>'
+        "<style>"
+        f".stApp{{background-color:{bg} !important;}}"
+        # tint the top header bar too, so there's no white gap above the title
+        f'[data-testid="stHeader"]{{background-color:{bg} !important;}}'
+        f'[data-testid="stSidebar"]{{background-color:{sidebar} !important;}}'
+        # neutral borders + fills derived from the active tint
+        f'[data-testid="stVerticalBlockBorderWrapper"]{{border-color:{border} !important;}}'
+        f'[data-testid="stFileUploaderDropzone"]{{border:1.5px dashed {border} !important;'
+        f"background:{fill} !important;}}"
+        f'[data-baseweb="input"],[data-baseweb="select"]>div{{border-color:{border} !important;}}'
+        "</style>"
     )
 
 
